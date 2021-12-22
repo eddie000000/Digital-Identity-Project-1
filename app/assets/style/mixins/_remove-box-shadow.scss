@@ -1,0 +1,8 @@
+.remove-box-shadow:focus {
+    box-shadow: none;
+}
+
+%remove-box-shadow {
+    box-shadow: none;
+}
+// @extend %remove-box-shadow;
