@@ -48,8 +48,7 @@
     </div>
 
     
-<div class="container d-flex justify-content-between py-3">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newContract">新增合約</button>
+<div class="container d-flex justify-content-end py-3">
     <form action="" method="get">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="輸入關鍵字搜尋合約">
@@ -60,12 +59,12 @@
     </form>
 </div>
 
-<div class="modal fade" id="newContract" tabindex="-1" aria-labelledby="newContractLabel" aria-hidden="true">
+<div class="modal fade" id="newContract1" tabindex="-1" aria-labelledby="newContract1Label" aria-hidden="true">
     <div class="modal-dialog">
         <form action="" method="post">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="newContractLabel">簽署新合約</h5>
+                    <h5 class="modal-title" id="newContract1Label">簽署新合約</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body px-4">
@@ -81,13 +80,33 @@
     </div>
 </div>
 
+<div class="modal fade" id="newContract2" tabindex="-1" aria-labelledby="newContract2Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newContract2Label">簽署新合約</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4">
+                    <label for="IDNumber" class="form-label">User ID</label>
+                    <input type="text" class="form-control" id="IDNumber" placeholder="請插入數位身分證">
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-primary">新增</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="container">
     <ul class="list-group">
         <li class="list-group-item">
             <div class="d-flex align-items-center">
                 合約名稱
                 <span class="badge rounded-pill bg-success ms-4">第一級</span>
-                <button type="button" class="btn btn-primary ms-auto">簽署新合約</button>
+                <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#newContract1">簽署新合約</button>
                 <button type="button" class="btn btn-outline-primary fw-bold px-2 ms-4" data-bs-toggle="collapse"
                     data-bs-target="#contract-1" aria-expanded="false" aria-controls="contract-1">
                     <span class="material-icons align-middle">expand_more</span>
@@ -121,7 +140,7 @@
             <div class="d-flex align-items-center">
                 合約名稱
                 <span class="badge rounded-pill bg-success ms-4">第一級</span>
-                <button type="button" class="btn btn-primary ms-auto">簽署新合約</button>
+                <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#newContract2">簽署新合約</button>
                 <button type="button" class="btn btn-outline-primary fw-bold px-2 ms-4" data-bs-toggle="collapse"
                     data-bs-target="#contract-2" aria-expanded="false" aria-controls="contract-2">
                     <span class="material-icons align-middle">expand_more</span>
