@@ -19,38 +19,20 @@ function button0()
     $Post_user_id = $_POST["IDNumber"];
     //echo $Post_user_id;
     include("connectMysql.php");
-    $sql_insert = "INSERT INTO contract(User_id, Company_id, Contract_end_date, Contract_avail, Contract_name, Contract_level) VALUES (?, 'C0001', '2022-02-10', 1, '合約1', '第一級')";
-    $stmt = $db_link->prepare($sql_insert);
-    $stmt->bind_param("s", $Post_user_id);
-    if ($stmt->execute()) {
-        $stmt->close();
-        $db_link->close();
-        // echo "新增成功";
-        echo "<script>alert('新增成功'); location.href = 'index.php';</script>";
-    } else {
-        echo "<script>alert('新增失敗'); location.href = 'index.php';</script>";
-        echo $stmt->error;
-        die();
-    }
+    $sql_insert = "INSERT INTO contract(User_id, Company_id, Contract_end_date, Contract_avail, Contract_name, Contract_level) VALUES ('". $Post_user_id ."', 'C0001', '2022-02-10', 1, '合約1', '第一級')";
+    //echo $sql_insert;
+    $stmt = $db_link->query($sql_insert);
+    echo "<script>location.href='index.php';</script>";
 }
 function button1()
 {
     $Post_user_id = $_POST["IDNumber"];
     //echo $Post_user_id;
     include("connectMysql.php");
-    $sql_insert = "INSERT INTO contract(User_id, Company_id, Contract_end_date, Contract_avail, Contract_name, Contract_level) VALUES (?, 'C0001', '2022-02-10', 1, '合約2', '第二級')";
-    $stmt = $db_link->prepare($sql_insert);
-    $stmt->bind_param("s", $Post_user_id);
-    if ($stmt->execute()) {
-        $stmt->close();
-        $db_link->close();
-        // echo "新增成功";
-        echo "<script>alert('新增成功'); location.href = 'index.php';</script>";
-    } else {
-        echo "<script>alert('新增失敗'); location.href = 'index.php';</script>";
-        echo $stmt->error;
-        die();
-    }
+    $sql_insert = "INSERT INTO contract(User_id, Company_id, Contract_end_date, Contract_avail, Contract_name, Contract_level) VALUES ('". $Post_user_id ."', 'C0001', '2022-02-10', 1, '合約2', '第二級')";
+    //echo $sql_insert;
+    $stmt = $db_link->query($sql_insert);
+    echo "<script>location.href='index.php';</script>";
 }
 
 //$db_link->close();
