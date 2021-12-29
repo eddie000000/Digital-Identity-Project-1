@@ -9,32 +9,27 @@ $Company_info = $db_link->query($sql_query);
 $sql_query = "SELECT User_id, Company_id, Contract_end_date, Contract_avail, Contract_name, 
 Contract_level FROM contract WHERE Company_id='{$Company_id}'";
 $All_Contract_info = $db_link->query($sql_query);
-if (array_key_exists('button0', $_POST)) {
-    button0();
-} else if (array_key_exists('button1', $_POST)) {
-    button1();
+if (array_key_exists('button', $_POST)) {
+    button();
 }
-function button0()
+function button()
 {
     $Post_user_id = $_POST["IDNumber"];
-    //echo $Post_user_id;
+    $Post_Contract_name = $_POST["ContractName"];
+    //echo $Post_Contract_name;
     include("connectMysql.php");
-    $sql_insert = "INSERT INTO contract(User_id, Company_id, Contract_end_date, Contract_avail, Contract_name, Contract_level) VALUES ('". $Post_user_id ."', 'C0001', '2022-02-10', 1, '合約1', '第一級')";
-    //echo $sql_insert;
+    if($Post_Contract_name == "合約1")
+    {
+        $sql_insert = "INSERT INTO contract(User_id, Company_id, Contract_end_date, Contract_avail, Contract_name, Contract_level) VALUES ('". $Post_user_id ."', 'C0001', '2022-02-10', 1, '合約1', '第一級')";
+    }
+    else
+    {
+        $sql_insert = "INSERT INTO contract(User_id, Company_id, Contract_end_date, Contract_avail, Contract_name, Contract_level) VALUES ('". $Post_user_id ."', 'C0001', '2022-02-10', 1, '合約2', '第二級')";
+    }
+    echo $sql_insert;
     $stmt = $db_link->query($sql_insert);
     echo "<script>location.href='index.php';</script>";
 }
-function button1()
-{
-    $Post_user_id = $_POST["IDNumber"];
-    //echo $Post_user_id;
-    include("connectMysql.php");
-    $sql_insert = "INSERT INTO contract(User_id, Company_id, Contract_end_date, Contract_avail, Contract_name, Contract_level) VALUES ('". $Post_user_id ."', 'C0001', '2022-02-10', 1, '合約2', '第二級')";
-    //echo $sql_insert;
-    $stmt = $db_link->query($sql_insert);
-    echo "<script>location.href='index.php';</script>";
-}
-
 //$db_link->close();
 ?>
 
@@ -100,8 +95,7 @@ function button1()
         </div>
     </div>
 
-
-    <div class="container d-flex justify-content-end py-3">
+<!--     <div class="container d-flex justify-content-end py-3">
         <form action="" method="get">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="輸入關鍵字搜尋合約">
@@ -110,7 +104,7 @@ function button1()
                 </button>
             </div>
         </form>
-    </div>
+    </div> -->
 
     <div class="modal fade" id="newContract1" tabindex="-1" aria-labelledby="newContract1Label" aria-hidden="true">
         <div class="modal-dialog">
@@ -131,7 +125,7 @@ function button1()
                     </div>
                     <div class="modal-footer border-0">
                         <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">取消</button>
-                        <input type="submit" name="button0" class="btn btn-primary" value="新增" />
+                        <input type="submit" name="button" class="btn btn-primary" value="新增" />
                     </div>
                 </div>
             </form>
@@ -157,7 +151,7 @@ function button1()
                     </div>
                     <div class="modal-footer border-0">
                         <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">取消</button>
-                        <input type="submit" name="button1" class="btn btn-primary" value="新增" />
+                        <input type="submit" name="button" class="btn btn-primary" value="新增" />
                     </div>
                 </div>
             </form>
