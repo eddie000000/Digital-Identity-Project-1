@@ -17,7 +17,7 @@ else if(array_key_exists('button1', $_POST)) {
 }
 function button0() {
     $Post_user_id = $_POST["IDNumber"];
-    echo $Post_user_id;
+    //echo $Post_user_id;
     include("connectMysql.php");
     $sql_insert = "INSERT INTO contract(User_id, Company_id, Contract_end_date, Contract_avail, Contract_name, Contract_level) VALUES (?, 'C0001', '2022-02-10', 1, '合約1', '第一級')";
 	$stmt = $db_link->prepare($sql_insert);
@@ -35,7 +35,7 @@ function button0() {
 }
 function button1() {
     $Post_user_id = $_POST["IDNumber"];
-    echo $Post_user_id;
+    //echo $Post_user_id;
     include("connectMysql.php");
     $sql_insert = "INSERT INTO contract(User_id, Company_id, Contract_end_date, Contract_avail, Contract_name, Contract_level) VALUES (?, 'C0001', '2022-02-10', 1, '合約2', '第二級')";
 	$stmt = $db_link->prepare($sql_insert);
