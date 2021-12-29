@@ -1,60 +1,133 @@
 ---
-title: Boostrap Index
+title: 合約資訊管理系統
 layout: ./app/layout.ejs
 engine: ejs
 current: index
 ---
 
-<div class="container d-flex justify-content-between py-3">
-    <button type="button" class="btn btn-primary">新增合約</button>
-    <form action="">
-        <input type="text" class="form-control" placeholder="輸入關鍵字搜尋合約">
+<div class="container d-flex justify-content-end py-3">
+    <form action="" method="get">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="輸入關鍵字搜尋合約">
+            <button type="submit" class="btn btn-primary">
+                <span class="material-icons align-middle">search</span>
+            </button>
+        </div>
     </form>
 </div>
 
+<div class="modal fade" id="newContract1" tabindex="-1" aria-labelledby="newContract1Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newContract1Label">簽署新合約</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4">
+                    <label for="IDNumber" class="form-label">User ID</label>
+                    <input type="text" class="form-control" id="IDNumber" placeholder="請插入數位身分證">
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-primary">新增</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="newContract2" tabindex="-1" aria-labelledby="newContract2Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newContract2Label">簽署新合約</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4">
+                    <label for="IDNumber" class="form-label">User ID</label>
+                    <input type="text" class="form-control" id="IDNumber" placeholder="請插入數位身分證">
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">取消</button>
+                    <button type="submit" class="btn btn-primary">新增</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="container">
     <ul class="list-group">
         <li class="list-group-item">
             <div class="d-flex align-items-center">
                 合約名稱
                 <span class="badge rounded-pill bg-success ms-4">第一級</span>
-                <a class="btn btn-primary ms-auto" href="#" role="button">檢視合約資料</a>
-                <button type="button" class="btn btn-primary ms-4">簽署新合約</button>
-                <button type="button" class="btn btn-outline-primary fw-bold px-2 ms-4" data-bs-toggle="collapse" data-bs-target="#contract-1" aria-expanded="false" aria-controls="contract-1">
+                <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#newContract1">簽署新合約</button>
+                <button type="button" class="btn btn-outline-primary fw-bold px-2 ms-4" data-bs-toggle="collapse"
+                    data-bs-target="#contract-1" aria-expanded="false" aria-controls="contract-1">
                     <span class="material-icons align-middle">expand_more</span>
                 </button>
             </div>
             <div class="collapse" id="contract-1">
-                  <p class="mt-2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi dolorem quisquam porro totam labore omnis ipsa quia corporis unde ducimus deleniti repellat a vitae distinctio alias qui optio, dicta repellendus fuga! Eos quos voluptatum ipsum sunt, reiciendis veritatis sequi incidunt iusto adipisci similique totam vel exercitationem magnam maxime, quasi enim?</p>
-              </div>
+                <div class="table-responsive mt-3">
+                    <table class="table table-hover align-middle text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">使用者名稱</th>
+                                <th scope="col">合約結束日期</th>
+                                <th scope="col">存取個資狀態</th>
+                                <th scope="col">合約到期通知</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>林X翔</td>
+                                <td>2021/12/25</td>
+                                <td>可以存取</td>
+                                <td><button type="button" class="btn btn-outline-primary"><span
+                                            class="material-icons align-middle">notifications</span></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </li>
         <li class="list-group-item">
             <div class="d-flex align-items-center">
                 合約名稱
-                    <span class="badge rounded-pill bg-success ms-4">第一級</span>
-                <a class="btn btn-primary ms-auto" href="#" role="button">檢視合約資料</a>
-                <button type="button" class="btn btn-primary ms-4">簽署新合約</button>
-                <button type="button" class="btn btn-outline-primary fw-bold px-2 ms-4" data-bs-toggle="collapse" data-bs-target="#contract-2" aria-expanded="false" aria-controls="contract-2">
+                <span class="badge rounded-pill bg-success ms-4">第一級</span>
+                <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#newContract2">簽署新合約</button>
+                <button type="button" class="btn btn-outline-primary fw-bold px-2 ms-4" data-bs-toggle="collapse"
+                    data-bs-target="#contract-2" aria-expanded="false" aria-controls="contract-2">
                     <span class="material-icons align-middle">expand_more</span>
                 </button>
             </div>
             <div class="collapse" id="contract-2">
-                  <p class="mt-2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi dolorem quisquam porro totam labore omnis ipsa quia corporis unde ducimus deleniti repellat a vitae distinctio alias qui optio, dicta repellendus fuga! Eos quos voluptatum ipsum sunt, reiciendis veritatis sequi incidunt iusto adipisci similique totam vel exercitationem magnam maxime, quasi enim?</p>
-              </div>
-        </li>
-        <li class="list-group-item">
-            <div class="d-flex align-items-center">
-                合約名稱
-                    <span class="badge rounded-pill bg-success ms-4">第一級</span>
-                <a class="btn btn-primary ms-auto" href="#" role="button">檢視合約資料</a>
-                <button type="button" class="btn btn-primary ms-4">簽署新合約</button>
-                <button type="button" class="btn btn-outline-primary fw-bold px-2 ms-4" data-bs-toggle="collapse" data-bs-target="#contract-3" aria-expanded="false" aria-controls="contract-3">
-                    <span class="material-icons align-middle">expand_more</span>
-                </button>
+                <div class="table-responsive mt-3">
+                    <table class="table table-hover align-middle text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">使用者名稱</th>
+                                <th scope="col">合約結束日期</th>
+                                <th scope="col">存取個資狀態</th>
+                                <th scope="col">合約到期通知</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>林X翔</td>
+                                <td>2021/12/25</td>
+                                <td>可以存取</td>
+                                <td><button type="button" class="btn btn-outline-primary"><span
+                                            class="material-icons align-middle">notifications</span></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="collapse" id="contract-3">
-                  <p class="mt-2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi dolorem quisquam porro totam labore omnis ipsa quia corporis unde ducimus deleniti repellat a vitae distinctio alias qui optio, dicta repellendus fuga! Eos quos voluptatum ipsum sunt, reiciendis veritatis sequi incidunt iusto adipisci similique totam vel exercitationem magnam maxime, quasi enim?</p>
-              </div>
-        </li>
-    </ul>
+</div>
+</li>
+
+</ul>
 </div>
