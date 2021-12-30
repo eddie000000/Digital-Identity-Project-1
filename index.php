@@ -12,24 +12,7 @@ $All_Contract_info = $db_link->query($sql_query);
 if (array_key_exists('button', $_POST)) {
     button();
 }
-function button()
-{
-    $Post_user_id = $_POST["IDNumber"];
-    $Post_Contract_name = $_POST["ContractName"];
-    //echo $Post_Contract_name;
-    include("connectMysql.php");
-    if($Post_Contract_name == "合約1")
-    {
-        $sql_insert = "INSERT INTO contract(User_id, Company_id, Contract_end_date, Contract_avail, Contract_name, Contract_level) VALUES ('". $Post_user_id ."', 'C0001', '2022-02-10', 1, '合約1', '第一級')";
-    }
-    else
-    {
-        $sql_insert = "INSERT INTO contract(User_id, Company_id, Contract_end_date, Contract_avail, Contract_name, Contract_level) VALUES ('". $Post_user_id ."', 'C0001', '2022-02-10', 1, '合約2', '第二級')";
-    }
-    echo $sql_insert;
-    $stmt = $db_link->query($sql_insert);
-    echo "<script>location.href='index.php';</script>";
-}
+
 //$db_link->close();
 ?>
 
@@ -108,7 +91,7 @@ function button()
 
     <div class="modal fade" id="newContract1" tabindex="-1" aria-labelledby="newContract1Label" aria-hidden="true">
         <div class="modal-dialog">
-            <form action="" method="post">
+            <form action="addContract.php" method="post">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="newContract1Label">簽署新合約</h5>
@@ -134,7 +117,7 @@ function button()
 
     <div class="modal fade" id="newContract2" tabindex="-1" aria-labelledby="newContract2Label" aria-hidden="true">
         <div class="modal-dialog">
-            <form action="" method="post">
+            <form action="addContract.php" method="post">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="newContract2Label">簽署新合約</h5>
