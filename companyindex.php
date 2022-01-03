@@ -1,13 +1,12 @@
 <?
 header("Connect-Type: text/html; charset = utf-8");
 include("connectMysql.php");
-$Company_id = "C0001";
-$sql_query = "SELECT Company_id, Company_name, Company_addr, Company_repre, Company_phone, 
-    Company_pubkey FROM company WHERE Company_id='{$Company_id}'";
+//$Company_id = "C0001";
+$Company_id = $_COOKIE["cid"];
+$sql_query = "SELECT Company_id, Company_name, Company_addr, Company_repre, Company_phone, Company_pubkey, Company_prikey FROM company WHERE Company_id='{$Company_id}'";
 $Company_info = $db_link->query($sql_query);
 
-$sql_query = "SELECT User_id, Company_id, Contract_end_date, Contract_avail, Contract_name, 
-Contract_level FROM contract WHERE Company_id='{$Company_id}'";
+$sql_query = "SELECT User_id, Company_id, Contract_end_date, Contract_avail, Contract_name, Contract_level FROM contract WHERE Company_id='{$Company_id}'";
 $All_Contract_info = $db_link->query($sql_query);
 if (array_key_exists('button', $_POST)) {
     button();
@@ -45,7 +44,7 @@ if (array_key_exists('button', $_POST)) {
                     echo "<button type='button' class='btn mx-3' data-bs-toggle='modal' data-bs-target='#companyName'>$temp</button>"
                     ?>
 
-                    <button type="button" class="btn btn-outline-primary">登出</button>
+                    <form action="./login.php"> <input type="submit" class="btn btn-outline-primary" value="登出" />
                 </div>
             </div>
         </nav>
@@ -144,9 +143,12 @@ if (array_key_exists('button', $_POST)) {
     $temp_contract1_info = array();
     $temp_contract2_info = array();
     while ($row_contract_info = $All_Contract_info->fetch_assoc()) {
-        if (strcmp($row_contract_info['Contract_name'], "合約1")) {
+        if (strcmp($row_contract_info['Contract_name'], "申請合約")) 
+        {
             array_push($temp_contract2_info, $row_contract_info);
-        } else {
+        } 
+        else 
+        {
             array_push($temp_contract1_info, $row_contract_info);
         }
     }
