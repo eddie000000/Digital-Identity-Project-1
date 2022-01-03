@@ -1,7 +1,7 @@
 <?
 header("Connect-Type: text/html; charset = utf-8");
 include("connectMysql.php");
-//$Company_id = "C0001";
+#$Company_id = "C0001";
 $Company_id = $_COOKIE["cid"];
 $sql_query = "SELECT Company_id, Company_name, Company_addr, Company_repre, Company_phone, Company_pubkey, Company_prikey FROM company WHERE Company_id='{$Company_id}'";
 $Company_info = $db_link->query($sql_query);
@@ -11,7 +11,53 @@ $All_Contract_info = $db_link->query($sql_query);
 if (array_key_exists('button', $_POST)) {
     button();
 }
+function encrypt($data, $pubkey) 
+    {
+        //公鑰加密 
+        $pubPem = chunk_split($pubkey, 64, "\n");
+        $pubPem = "-----BEGIN PUBLIC KEY-----\n" . $pubPem . "-----END PUBLIC KEY-----\n";
+        //var_dump($pubPem);
 
+        define('RSA_PUBLIC', $pubPem);
+        $public_key = openssl_pkey_get_public(RSA_PUBLIC); 
+        if(!$public_key)
+        {
+            die('公鑰不可用');  
+        }
+        //第一個引數是待加密的資料只能是string，第二個引數是加密後的資料,第三個引數是openssl_pkey_get_public返回的資源型別,第四個引數是填充方式
+        $return_en = openssl_public_encrypt($data, $crypted, $public_key);
+        if(!$return_en)
+        {
+            return('加密失敗,請檢查RSA祕鑰');
+        }
+        $eb64_cry = base64_encode($crypted);
+        //echo "公鑰加密資料：".$eb64_cry;
+        //echo "<hr>";
+        return $eb64_cry;
+    }
+
+    function decrypt($eb64_cry_data, $prikey)
+    {
+        //私鑰解密
+        $priPem = chunk_split($prikey, 64, "\n" );
+        $priPem = "-----BEGIN PRIVATE KEY-----\n" . $priPem . "-----END PRIVATE KEY-----\n";
+        //var_dump($priPem);
+        define('RSA_PRIVATE', $priPem);
+
+        $private_key = openssl_pkey_get_private(RSA_PRIVATE);
+        if(!$private_key)
+        {
+            die('私鑰不可用');
+        }
+        $return_de = openssl_private_decrypt(base64_decode($eb64_cry_data), $decrypted, $private_key);
+        if(!$return_de)
+        {
+            return('解密失敗,請檢查RSA祕鑰');
+        }
+        //echo "私鑰解密資料:".$decrypted;
+        //echo "<hr>";
+        return $decrypted;
+    }
 //$db_link->close();
 ?>
 
@@ -32,7 +78,10 @@ if (array_key_exists('button', $_POST)) {
 </head>
 
 <body>
-    <? $row = $Company_info->fetch_assoc(); ?>
+    <? $row = $Company_info->fetch_assoc(); 
+        $pubk = $row['Company_pubkey'];
+        $prik = $row['Company_prikey'];
+    ?>
     <div class="container-fluid">
         <nav class="navbar navbar-light bg-light">
             <div class="container">
@@ -152,6 +201,8 @@ if (array_key_exists('button', $_POST)) {
             array_push($temp_contract1_info, $row_contract_info);
         }
     }
+    //echo '<pre>'; print_r($temp_contract2_info); echo '</pre>';
+    //echo '<pre>'; print_r($temp_contract1_info); echo '</pre>';
     //echo $temp_contract_info[1]['Contract_name'];
     ?>
     <div class="container">
@@ -181,13 +232,21 @@ if (array_key_exists('button', $_POST)) {
                             </thead>
                             <tbody>
                                 <?
-                                for ($i = 0; $i < count($temp_contract1_info); $i++) {
+                                for ($i = 0; $i < count($temp_contract1_info); $i++) 
+                                {
                                     echo "<tr>";
                                     $temp = $temp_contract1_info[$i]['User_id'];
-                                    $sql_query = "SELECT User_name FROM user WHERE User_id='{$temp}'";
+                                    $sql_query = "SELECT User_name, user_gender, user_birth, user_phone FROM user WHERE User_id='{$temp}'";
                                     $row_User_name = $db_link->query($sql_query);
                                     $row = $row_User_name->fetch_assoc();
-                                    $U_name = $row['User_name'];
+
+                                    $enc_User_name_L1 = encrypt((string)$row['User_name'],$pubk);
+                                    $enc_User_gender_L1 = encrypt((string)$row['user_gender'],$pubk);
+                                    $enc_User_birth_L1 = encrypt((string)$row['user_birth'],$pubk);
+                                    $enc_User_phone_L1 = encrypt((string)$row['user_phone'],$pubk);
+
+                                    //$U_name = $row['User_name'];
+                                    $U_name = decrypt($enc_User_name_L1, $prik);
                                     $U_name[3] = 'X';
                                     $U_name[4] = $U_name[6];
                                     $U_name[5] = $U_name[7];
@@ -199,9 +258,11 @@ if (array_key_exists('button', $_POST)) {
                                     $temp = $temp_contract1_info[$i]['Contract_end_date'];
                                     echo "<td> $temp </td>";
 
-                                    if ($temp_contract1_info[$i]['Contract_avail']) {
+                                    if ($temp_contract1_info[$i]['Contract_avail']) 
+                                    {
                                         echo "<td> 可以存取 </td>";
-                                    } else {
+                                    } else 
+                                    {
                                         echo "<td> 無法存取 </td>";
                                     }
                                 ?>
@@ -241,10 +302,22 @@ if (array_key_exists('button', $_POST)) {
                                 for ($i = 0; $i < count($temp_contract2_info); $i++) {
                                     echo "<tr>";
                                     $temp = $temp_contract2_info[$i]['User_id'];
-                                    $sql_query = "SELECT User_name FROM user WHERE User_id='{$temp}'";
+                                    $sql_query = "SELECT User_name,user_gender,user_birth, user_phone, user_parent, user_spouse, user_addr, user_idnum FROM user WHERE User_id='{$temp}'";
                                     $row_User_name = $db_link->query($sql_query);
                                     $row = $row_User_name->fetch_assoc();
-                                    $U_name = $row['User_name'];
+
+                                    $enc_User_name = encrypt((string)$row['User_name'],$pubk);
+                                    $enc_User_gender = encrypt((string)$row['user_gender'],$pubk);
+                                    $enc_User_birth = encrypt((string)$row['user_birth'],$pubk);
+                                    $enc_User_phone = encrypt((string)$row['user_phone'],$pubk);
+                                    $enc_User_parent = encrypt((string)$row['user_parent'],$pubk);
+                                    $enc_User_spouse = encrypt((string)$row['user_spouse'],$pubk);
+                                    $enc_User_addr = encrypt((string)$row['user_addr'],$pubk);
+                                    $enc_User_idnum = encrypt((string)$row['user_idnum'],$pubk);
+                                    
+                                    //$U_name = $row['User_name'];
+                                    $U_name = decrypt($enc_User_name ,$prik);
+                                    //$U_name = $enc_User_name;
                                     $U_name[3] = 'X';
                                     $U_name[4] = $U_name[6];
                                     $U_name[5] = $U_name[7];
@@ -261,6 +334,7 @@ if (array_key_exists('button', $_POST)) {
                                     } else {
                                         echo "<td> 無法存取 </td>";
                                     }
+                                    
                                 ?>
                                     <td><button type="button" class="btn btn-outline-primary"><span class="material-icons align-middle">notifications</span></button></td>
                                     </tr>

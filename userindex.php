@@ -1,7 +1,7 @@
 <?php
 //dbs connect and get value
-$User_id = "U0001";
-#$User_id =  $_COOKIE["uid"];
+#$User_id = "U0001";
+$User_id =  $_COOKIE["uid"];
 $contract_userid = array();
 $contract_comapnyid = array();
 $contract = array();
@@ -27,6 +27,7 @@ while ($row_result_name = $result_name->fetch_assoc())
 
     $cnt++;
 }
+setcookie("cpname", $contract_comapnyid, time() + (86400 * 30), "/"); // 86400 = 1 day 
 ?>
 <?php
 //cookie storge
@@ -64,16 +65,16 @@ for ($i = 0; $i < $cnt; $i++) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="userindex.php">Home</a>
+                        <a class="nav-link active" aria-current="page" href="./userindex.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="userdata.php">My imformation</a>
+                        <a class="nav-link" href="./userdata.php">My imformation</a>
                     </li>
                 </ul>
             </div>
             <a><?php echo $User_id ?></a>
             <a>&emsp;</a>
-            <form action="./login.php"><button class="btn btn-outline-success" type="submit">logout</button>
+            <button class="btn btn-outline-success" type="submit">logout</button>
         </div>
     </nav>
 

@@ -1,6 +1,11 @@
 <?php
 // $User_id = "us12344";
+include('conn.php');
 $User_id = $_COOKIE["uid"];
+$cpn = $_COOKIE["cpname"];
+$sql = "SELECT Company_name FROM company WHERE Company_id='{$cpn}'";
+$Company_info = $db_link->query($sql);
+$cname = $Company_info->fetch_assoc();
 $out_contract = array();
 $out_date = array();
 $out_status = array();
@@ -52,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <a><?php echo $User_id ?></a>
             <a>&emsp;</a>
-            <button class="btn btn-outline-success" type="submit">logout</button>
+            <form action="./login.php"><button class="btn btn-outline-success" type="submit">logout</button></form>
         </div>
     </nav>
     <div class="container">
@@ -65,14 +70,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col-4">存取狀態</div>
         </div>
         <div class="row">
-            <div class="col-4">xxx</div>
+            <div class="col-4"><?echo $cname['Company_name'];?></div>
             <div class="col-4"><?php echo "$out_date[$id]";?></div>
             <div class="col-4"><?php echo "$out_status[$id]";?></div>
         </div>
         <div class="row my-3">
-            <div class="col">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum sunt obcaecati, quae laboriosam culpa rerum quasi, fuga dolorem libero inventore cupiditate repellendus non! Ea, ex? Animi quidem vero ipsam qui!
-            </div>
+            <div class="col"></div>
         </div>
     </div>
 

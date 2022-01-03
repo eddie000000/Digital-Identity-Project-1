@@ -7,6 +7,7 @@
 <body>
 
 <?php
+   ini_set('display_errors','off');
    function genOTP($n) { 
        
       $numbers = "0123456789"; 
@@ -68,10 +69,10 @@
          }
       }
       if ($submit == "第一次登入") {
-         $sql_first_login = "SELECT First_time_login FROM account WHERE password='";
+         $sql_first_login = "SELECT First_time_login FROM account WHERE password ='";
          $sql_first_login.= $password."' AND account='".$account."'";
          $first_login = mysqli_query($link, $sql_first_login)->fetch_assoc();
-         if ($first_login == 1){
+         if ($first_login["First_time_login"] == 1){
             setcookie("member", $account, time() + (86400 * 30), "/"); // 86400 = 1 day   
             header("Location: firstlogin.php"); 
          }else{
@@ -96,8 +97,8 @@
       <input type="password" name="password" id="password" required/>
       <br>
       <br>
-      <input type="submit", name="login" value="登入"/>
-      <input type="submit", name="login" value="第一次登入"/>
+      <input type="submit" name="login" value="登入"/>
+      <input type="submit" name="login" value="第一次登入"/>
       <br>
       <br>
       <div>
@@ -106,8 +107,8 @@
             $opt = genOTP(6);
             echo $opt;
             $sql_opt = "UPDATE account SET password = '$opt' WHERE First_time_login = 1";
-            mysqli_query(mysqli_connect("localhost","root","123","Login"), $sql_opt);
-            mysqli_close(mysqli_connect("localhost","root","123","Login"));
+            mysqli_query(mysqli_connect("localhost","root","1234","network_security"), $sql_opt);
+            mysqli_close(mysqli_connect("localhost","root","1234","network_security"));
          ?>
       </div>
    </div>
