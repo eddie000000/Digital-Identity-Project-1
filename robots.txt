@@ -1,0 +1,14 @@
+User-agent: Googlebot
+Allow: /login.php/
+Disallow: /addContract.php/
+Disallow: /companyindex.php/
+Disallow: /conn.php/
+Disallow: /connectMysql.php/
+Disallow: /contract.php/
+Disallow: /detail.php/
+Disallow: /firstlogin.php/
+Disallow: /login.php/
+Disallow: /update.php/
+Disallow: /userdata.php/
+Disallow: /userindex.php/
+Disallow: /userinfo.php/
