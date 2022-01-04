@@ -19,10 +19,10 @@ while ($row_result_name = $result_name->fetch_assoc()) {
     $userid[$ct] = $row_result_name["User_id"];
     $name[$ct] = $row_result_name["User_name"];
     $gender[$ct] = $row_result_name["user_gender"];
-    $birthday[$ct] = $row_result_name["user_birthday"];
+    $birthday[$ct] = $row_result_name["user_birth"];
     $phone[$ct] = $row_result_name["user_phone"];
     $parent[$ct] = $row_result_name["user_parent"];
-    $couple[$ct] = $row_result_name["user_supose"];
+    $couple[$ct] = $row_result_name["user_spouse"];
     $address[$ct] = $row_result_name["user_addr"];
     $identify_id[$ct] = $row_result_name["user_idnum"];
     $ct++;
