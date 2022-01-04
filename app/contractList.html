@@ -1,0 +1,106 @@
+---
+title: 合約資訊管理系統
+layout: ./app/userLayout.ejs
+engine: ejs
+current: contracts
+---
+
+<div class="modal fade" id="stop1" tabindex="-1" aria-labelledby="stop1Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="stop1Label">終止合約</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4">
+                    <p>確定要終止合約？</p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">確定</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="stop2" tabindex="-1" aria-labelledby="stop2Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="stop2Label">終止合約</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4">
+                    <p>確定要終止合約？</p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">確定</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <h2 class="h3 my-3">已簽署合約</h2>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-10 d-flex justify-content-evenly align-items-center">
+                    <h3 class="h6 mb-0">合約名稱</h3>
+                    <span class="badge rounded-pill bg-success">第一級</span>
+                    <p class="h6 mb-0">簽約公司名稱</p>
+                    <h3 class="h6 mb-0">合約到期日</h3>
+                    <p class="h6 mb-0">2022/01/01</p>
+                    <h3 class="h6 mb-0">合約存取狀態</h3>
+                    <span class="badge bg-success">存取中</span>
+                </div>
+                <div class="col-2 d-flex justify-content-around">
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#stop1">終止合約</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm fw-bold px-2" data-bs-toggle="collapse"
+                        data-bs-target="#contract1" aria-expanded="false" aria-controls="contract1">
+                        <span class="material-icons align-middle">expand_more</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="collapse" id="contract1">
+                <h3 class="h5 mt-3">合約簡介</h3>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique libero deleniti iste
+                    nulla blanditiis nihil iusto quo corrupti accusamus quam.</p>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-10 d-flex justify-content-evenly align-items-center">
+                    <h3 class="h6 mb-0">合約名稱</h3>
+                    <span class="badge rounded-pill bg-success">第一級</span>
+                    <p class="h6 mb-0">簽約公司名稱</p>
+                    <h3 class="h6 mb-0">合約到期日</h3>
+                    <p class="h6 mb-0">2022/01/01</p>
+                    <h3 class="h6 mb-0">合約存取狀態</h3>
+                    <span class="badge bg-success">存取中</span>
+                </div>
+                <div class="col-2 d-flex justify-content-around">
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#stop2">終止合約</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm fw-bold px-2" data-bs-toggle="collapse"
+                        data-bs-target="#contract2" aria-expanded="false" aria-controls="contract2">
+                        <span class="material-icons align-middle">expand_more</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="collapse" id="contract2">
+                <h3 class="h5 mt-3">合約簡介</h3>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique libero deleniti iste
+                    nulla blanditiis nihil iusto quo corrupti accusamus quam.</p>
+            </div>
+        </li>
+    </ul>
+
+</div>
