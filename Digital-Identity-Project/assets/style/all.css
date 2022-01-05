@@ -1,0 +1,30 @@
+.index__h1 {
+  color: #00cc99;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.remove-box-shadow:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.z-1 {
+  z-index: 1;
+}
+
+.z-2 {
+  z-index: 2;
+}
+
+.z-3 {
+  z-index: 3;
+}
+
+.mb-fade {
+  -webkit-transition: margin-bottom .3s;
+  -o-transition: margin-bottom .3s;
+  transition: margin-bottom .3s;
+}
+
+/*# sourceMappingURL=all.css.map */
